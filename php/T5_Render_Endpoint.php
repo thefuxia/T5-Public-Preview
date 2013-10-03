@@ -18,8 +18,16 @@ class T5_Render_Endpoint
 	{
 		$post_id = $this->endpoint->get_value();
 
-		if ( ! $post_id or ! $this->meta->get_value( $post_id ) )
+		if ( ! $post_id )
 			return;
+
+		if ( 1 !== $this->meta->get_value( $post_id )
+			or 'publish' === get_post_status( $post_id )
+			)
+		{
+			wp_redirect( get_permalink( $post_id ) );
+			exit;
+		}
 
 		$type = get_post_type( $post_id );
 
