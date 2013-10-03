@@ -12,9 +12,7 @@ class T5_Endpoint implements T5_Endpoint_Interface
 		add_rewrite_endpoint( $name, $position );
 		$this->fix_failed_registration();
 
-		//if ( $allow_empty_calls )
-			add_filter( 'request', array ( $this, 'set_query_var' ) );
-			add_filter( 'query_vars', array ( $this, 'set_query_var' ) );
+		add_filter( 'request', array ( $this, 'set_query_var' ) );
 	}
 
 	public function get_url( $value )
