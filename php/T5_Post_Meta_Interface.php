@@ -8,7 +8,6 @@ interface T5_Post_Meta_Interface
 
 	public function delete( $new_status, $old_status, $post );
 
-	public function get_nonce();
 
 	public function get_value( $post_id );
 
