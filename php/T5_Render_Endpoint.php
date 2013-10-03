@@ -29,8 +29,6 @@ class T5_Render_Endpoint
 			exit;
 		}
 
-		$type = get_post_type( $post_id );
-
 		$query = array (
 			'suppress_filters' => TRUE,
 			'p'                => $post_id,
