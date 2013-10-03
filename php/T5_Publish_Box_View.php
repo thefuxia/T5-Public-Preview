@@ -29,7 +29,7 @@ class T5_Publish_Box_View
 		$name    = $this->meta->get_input_name();
 		$id      = $name . '_id';
 		$value   = esc_attr( $this->meta->get_value( $post_id ) );
-		$link    = $this->get_link( $value );
+		$link    = $this->get_link( $value, $post_id );
 		$checked = checked( $value, 1, FALSE );
 
 		$label = __( 'Enable public preview', 'plugin_t5_public_preview' );
@@ -46,7 +46,7 @@ class T5_Publish_Box_View
 EOD;
 	}
 
-	protected function get_link ( $value )
+	protected function get_link ( $value, $post_id )
 	{
 		if ( empty ( $value ) )
 			return;
