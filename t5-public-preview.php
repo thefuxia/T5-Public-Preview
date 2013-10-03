@@ -1,0 +1,26 @@
+<?php # -*- coding: utf-8 -*-
+/**
+ * Plugin Name: T5 Public Preview
+ * Description: Make drafts and pending posts publicly visible.
+ * Plugin URI:  http://wordpress.stackexchange.com/q/107062/73
+ * Version:     2013.10.03
+ * Author:      Thomas Scholz
+ * Author URI:  http://toscho.de
+ * Licence:     MIT
+ * License URI: http://opensource.org/licenses/MIT
+ * Textdomain:  plugin_t5_public_preview
+ * Domain Path: /languages
+ * Network:
+ */
+
+add_action( 'wp_loaded', 't5_public_preview_init' );
+
+function t5_public_preview_init() {
+
+	$dir = dirname( __FILE__ );
+
+	require "$dir/php/T5_Public_Preview.php";
+
+	$preview = new T5_Public_Preview( $dir );
+	$preview->setup();
+}
