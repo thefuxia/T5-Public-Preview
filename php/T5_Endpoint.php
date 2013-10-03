@@ -18,9 +18,9 @@ class T5_Endpoint implements T5_Endpoint_Interface
 	public function get_url( $value )
 	{
 		if ( EP_ROOT === $this->position )
-			return site_url( "$this->name/$value" );
+			return user_trailingslashit( site_url( "$this->name/$value" ) );
 
-		return user_trailingslashit( get_permalink( $value ) ) . "/$this->name/$value";
+		return user_trailingslashit( rtrim( get_permalink( $value ), '/' ) . "/$this->name/$value" );
 
 		// incomplete, doesn't handle terms and taxonomies
 	}
