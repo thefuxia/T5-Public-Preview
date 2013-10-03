@@ -1,16 +1,35 @@
 <?php # -*- coding: utf-8 -*-
-
+/**
+ * Main controller.
+ *
+ * @package    T5_Public_Preview
+ * @subpackage Controllers
+ */
 class T5_Public_Preview
 {
+	/**
+	 * Path to plugin directory.
+	 *
+	 * @type string
+	 */
 	protected $dir;
+
 	/**
 	 * Constructor.
+	 *
+	 * @wp-hook wp_loaded
 	 */
 	public function __construct( $dir )
 	{
 		$this->dir = $dir;
 	}
 
+	/**
+	 * Create objects
+	 *
+	 * @wp-hook wp_loaded
+	 * @return  void
+	 */
 	public function setup()
 	{
 		$this->load_classes();
@@ -19,6 +38,8 @@ class T5_Public_Preview
 		$lang->load();
 
 		$endpoint = new T5_Endpoint;
+		// If you translate this, avoid reserved words like 'preview' or 'draft'.
+		// That would mess up the global $wp_query.
 		$endpoint->register(
 			_x( 'post-preview', 'endpoint url prefix', 'plugin_t5_public_preview' )
 		);
@@ -48,6 +69,12 @@ class T5_Public_Preview
 		add_action( 'transition_post_status', array ( $meta, 'delete' ), 10, 3 );
 	}
 
+	/**
+	 * Instead of an auto-loader we load everything immediately.
+	 *
+	 * @wp-hook wp_loaded
+	 * @return  void
+	 */
 	protected function load_classes()
 	{
 		$classes = array (
@@ -62,6 +89,9 @@ class T5_Public_Preview
 		);
 
 		foreach ( $classes as $class )
-			class_exists( $class ) or require "$this->dir/php/$class.php";
+		{
+			if ( ! class_exists( $class ) and ! interface_exists( $class ) )
+				require "$this->dir/php/$class.php";
+		}
 	}
 }

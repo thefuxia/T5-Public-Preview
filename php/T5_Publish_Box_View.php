@@ -1,24 +1,72 @@
 <?php # -*- coding: utf-8 -*-
-
+/**
+ * Show control element in post publish box.
+ *
+ * @package    T5_Public_Preview
+ * @subpackage Views
+ */
 class T5_Publish_Box_View
 {
-	protected $endpoint, $meta, $lang;
+	/**
+	 * Endpoint handler.
+	 *
+	 * @type T5_Endpoint_Interface
+	 */
+	protected $endpoint;
 
-	public function set_post_meta_handler( T5_Post_Meta_Interface $meta )
-	{
-		$this->meta = $meta;
-	}
+	/**
+	 * Post meta handler.
+	 *
+	 * @type T5_Post_Meta_Interface
+	 */
+	protected $meta;
 
+	/**
+	 * Language handler.
+	 *
+	 * @type T5_Language_Interface
+	 */
+	protected $lang;
+
+	/**
+	 * Store endpoint handler.
+	 *
+	 * @param  T5_Endpoint_Interface $endpoint
+	 * @return void
+	 */
 	public function set_endpoint_handler( T5_Endpoint_Interface $endpoint )
 	{
 		$this->endpoint = $endpoint;
 	}
 
+	/**
+	 * Store post meta handler
+	 *
+	 * @param  T5_Post_Meta_Interface $meta
+	 * @return void
+	 */
+	public function set_post_meta_handler( T5_Post_Meta_Interface $meta )
+	{
+		$this->meta = $meta;
+	}
+
+	/**
+	 * Store language handler.
+	 *
+	 * @param  T5_Language_Interface $lang
+	 * @return void
+	 */
 	public function set_language_handler( T5_Language_Interface $lang )
 	{
 		$this->lang = $lang;
 	}
 
+	/**
+	 * Show the checkbox.
+	 *
+	 * @wp-hook post_submitbox_misc_actions
+	 * @return  void
+	 */
 	public function render()
 	{
 		$post_id = get_the_ID();
@@ -46,6 +94,13 @@ class T5_Publish_Box_View
 EOD;
 	}
 
+	/**
+	 * Get preview link.
+	 *
+	 * @param  int $value
+	 * @param  int $post_id
+	 * @return void|string
+	 */
 	protected function get_link ( $value, $post_id )
 	{
 		if ( empty ( $value ) )

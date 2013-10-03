@@ -10,11 +10,16 @@
  * License URI: http://opensource.org/licenses/MIT
  * Textdomain:  plugin_t5_public_preview
  * Domain Path: /languages
- * Network:
  */
 
 add_action( 'wp_loaded', 't5_public_preview_init' );
 
+/**
+ * Starter
+ *
+ * @wp-hook wp_loaded
+ * @return  void
+ */
 function t5_public_preview_init() {
 
 	$dir = dirname( __FILE__ );

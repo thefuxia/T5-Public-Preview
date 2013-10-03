@@ -1,6 +1,17 @@
 <?php # -*- coding: utf-8 -*-
+/**
+ * Language loader.
+ *
+ * @package    T5_Public_Preview
+ * @subpackage Models
+ */
 class T5_Public_Preview_Language implements T5_Language_Interface
 {
+	/**
+	 * Path to plugin directory.
+	 *
+	 * @type string
+	 */
 	protected $dir;
 	/**
 	 * Constructor.

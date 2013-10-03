@@ -1,10 +1,31 @@
 <?php # -*- coding: utf-8 -*-
-
+/**
+ * Endpoint handler.
+ *
+ * @package    T5_Public_Preview
+ * @subpackage Models
+ */
 class T5_Endpoint implements T5_Endpoint_Interface
 {
-	protected $name, $position, $allow_empty_calls;
+	/**
+	 * Endpoint name
+	 *
+	 * @type string
+	 */
+	protected $name;
 
-	public function register( $name, $position = EP_ROOT, $allow_empty_calls = FALSE )
+	/**
+	 * Endpoint position.
+	 *
+	 * @type int
+	 */
+	protected $position;
+
+	/**
+	 * (non-PHPdoc)
+	 * @see T5_Endpoint_Interface::register()
+	 */
+	public function register( $name, $position = EP_ROOT )
 	{
 		$this->name     = $name;
 		$this->position = $position;
@@ -15,6 +36,10 @@ class T5_Endpoint implements T5_Endpoint_Interface
 		add_filter( 'request', array ( $this, 'set_query_var' ) );
 	}
 
+	/**
+	 * (non-PHPdoc)
+	 * @see T5_Endpoint_Interface::get_url()
+	 */
 	public function get_url( $value )
 	{
 		if ( EP_ROOT === $this->position )
@@ -25,6 +50,10 @@ class T5_Endpoint implements T5_Endpoint_Interface
 		// incomplete, doesn't handle terms and taxonomies
 	}
 
+	/**
+	 * (non-PHPdoc)
+	 * @see T5_Endpoint_Interface::get_value()
+	 */
 	public function get_value()
 	{
 		$value = (int) get_query_var( $this->name );
