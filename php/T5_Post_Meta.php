@@ -26,11 +26,6 @@ class T5_Post_Meta implements T5_Post_Meta_Interface
 		update_post_meta( $post_id, $this->key, 1 );
 	}
 
-	public function get_nonce()
-	{
-
-	}
-
 	public function get_value( $post_id )
 	{
 		$value = get_post_meta( $post_id, $this->key, TRUE );
